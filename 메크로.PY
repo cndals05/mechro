@@ -4,6 +4,7 @@ import time
 # 설정
 recordKey = "f2"  # 녹화 키
 playKey = "esc"  # 실행 키
+delay = 1 / 1000
 
 # 변수
 recording = False
@@ -48,14 +49,14 @@ def main():
     while True:
         if recording:  # 키 녹화 중일 경우
             recorded = keyboard.read_key()
-            if not recorded in keyRecords and recorded != recordKey and recorded != playKey:  # 읽힌 키가 아직 안 찍힌 키고 재생키랑 녹화키랑 안 겹치면
+            if recorded != recordKey and recorded != playKey:
                 keyRecords.append(recorded)
                 print(f"{recorded}키 녹화됨")
         elif playing:  # 재생
             for key in keyRecords:
                 keyboard.press(key)
                 keyboard.release(key)
-                time.sleep(1 / 1000)
+                time.sleep(delay)
 
 
 if __name__ == "__main__":
